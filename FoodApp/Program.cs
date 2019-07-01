@@ -9,7 +9,7 @@ namespace FoodApp
     class Program
     {
         static Client currentClient;
-        static ClientsCollection collection;
+        static ClientsCollection collection = collection.Load();
 
         static void Clear()
         {
@@ -20,7 +20,6 @@ namespace FoodApp
 
         static void Main(string[] args)
         {
-
         }
     }
 }

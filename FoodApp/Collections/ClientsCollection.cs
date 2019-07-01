@@ -13,11 +13,29 @@ namespace FoodApp
     {
         public List<Client> clients = new List<Client>();
 
-        public void Save(ClientsCollection collection)
+        public void AddClient(string login, string password, string name, Status status)
+        {
+            clients.Add(new Client(login, password, name, status));
+        }
+
+        public bool CheckContainsLogin(string login)
+        {
+            foreach(Client client in clients)
+            {
+                if(client.Login == login)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void Save()
         {
             FileStream stream = new FileStream("clientsDataBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, collection);
+            formatter.Serialize(stream, clients);
             stream.Close();
         }
 
