@@ -31,36 +31,6 @@ namespace FoodApp
             return false;
         }
 
-        public void Save()
-        {
-            FileStream stream = new FileStream("clientsDataBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, clients);
-            stream.Close();
-        }
-
-        public ClientsCollection Load()
-        {
-            ClientsCollection clientsCollection;
-
-            if (File.Exists("userBase.dat"))
-            {
-                FileStream clientsFileStream = new FileStream("userBase.dat", FileMode.Open, FileAccess.ReadWrite);
-                BinaryFormatter formatter = new BinaryFormatter();
-                clientsCollection = formatter.Deserialize(clientsFileStream) as ClientsCollection;
-                clientsFileStream.Close();
-            }
-            else
-            {
-                clientsCollection = new ClientsCollection();
-
-                FileStream stream = new FileStream("userBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, clientsCollection);
-                stream.Close();
-            }
-
-            return clientsCollection;
-        }
+        
     }
 }

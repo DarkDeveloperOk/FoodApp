@@ -8,6 +8,7 @@ namespace FoodApp
 {
     class Order
     {
-
+        int productId;
+        int 
     }
 }

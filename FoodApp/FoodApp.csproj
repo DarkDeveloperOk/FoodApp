@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Authorization.cs" />
+    <Compile Include="Classes\ClientController.cs" />
     <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\DataBaseController.cs" />
     <Compile Include="Classes\Order.cs" />
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Collections\ClientsCollection.cs" />
     <Compile Include="Collections\Status.cs" />
-    <Compile Include="Collections\Storage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

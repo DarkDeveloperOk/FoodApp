@@ -9,7 +9,9 @@ namespace FoodApp
     class Program
     {
         static Client currentClient;
-        static ClientsCollection collection = collection.Load();
+        static ClientsCollection collection = DataBaseController.ClientBaseLoad();
+        [Serializable]
+        static Dictionary<int, int> storage;
 
         static void Clear()
         {
@@ -20,6 +22,7 @@ namespace FoodApp
 
         static void Main(string[] args)
         {
+
         }
     }
 }

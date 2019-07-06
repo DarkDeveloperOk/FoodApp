@@ -11,19 +11,19 @@ namespace FoodApp
         public string Name { get; set; }
         public string Section { get; set; }
         public double Price { get; set; }
-        public int Weight { get; set; }
+        readonly int productId;
 
         public Product(string name, string section, double price, int weight)
         {
             Name = name;
             Section = section;
             Price = price;
-            Weight = weight;
+            productId = Int32.Parse(DateTime.Now.Ticks.ToString().Remove(0, 9));
         }
 
-        public int CheckOnStorage(Storage storage)
+        public int ProductId
         {
-            return storage.ShowQuantity(this);
+            get { return productId; }
         }
     }
 }

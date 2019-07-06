@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
-    class Authorization
+    class ClientController
     {
         string login;
         string password;
