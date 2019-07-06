@@ -10,11 +10,11 @@ namespace FoodApp
 {
     static class DataBaseController
     {
-        public static void ClientBaseSave(List<Client> clients)
+        public static void ClientBaseSave(ClientsCollection clientsCollection)
         {
             FileStream stream = new FileStream("clientsDataBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, clients);
+            formatter.Serialize(stream, clientsCollection);
             stream.Close();
         }
 

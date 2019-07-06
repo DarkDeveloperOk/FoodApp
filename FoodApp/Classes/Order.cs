@@ -8,7 +8,17 @@ namespace FoodApp
 {
     class Order
     {
-        int productId;
-        int 
+        public int productId;
+        public int clientName;
+        public int phoneNumber;
+        public ShoppingCart shoppingCart;
+
+        public Order(int productId, int clientName, int phoneNumber, ShoppingCart shoppingCart)
+        {
+            this.productId = productId;
+            this.clientName = clientName;
+            this.phoneNumber = phoneNumber;
+            this.shoppingCart = shoppingCart;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace FoodApp
         readonly string login;
         private string password;
         public string name;
+        public int phoneNumber;
         public Status status;
 
         public Client()
@@ -18,12 +19,13 @@ namespace FoodApp
 
         }
 
-        public Client(string login, string password, string name, Status status)
+        public Client(string login, string password, string name, int phoneNumber, Status status)
         {
             this.login = login;
             this.password = password;
             this.name = name;
             this.status = status;
+            this.phoneNumber = phoneNumber;
         }
 
         public string Login

@@ -12,6 +12,7 @@ namespace FoodApp
         string login;
         string password;
         string name;
+        int phoneNumber;
         string choose;
 
         public Client DoAuthorization(ClientsCollection clientsCollection)
@@ -73,6 +74,8 @@ namespace FoodApp
         public void ToRegister(ref ClientsCollection clientsCollection)
         {
             Regex ruls = new Regex(@"^[a-zA-Z0-9]+$");
+            Regex phoneRegex = new Regex(@"^((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}$");
+            Regex nameRegex = new Regex(@"^[а-яА-Яa-zA-Z]+$");
 
             Console.WriteLine("ВАЖНО! Вводите только латинские символы и цифры!!!");
             Console.WriteLine(new string('-', 50));
@@ -123,7 +126,6 @@ namespace FoodApp
             while(true)
             {
                 name = Console.ReadLine();
-                Regex nameRegex = new Regex(@"^[а-яА-Яa-zA-Z0-9]+$");
 
                 if (!nameRegex.IsMatch(name))
                 {
@@ -134,11 +136,26 @@ namespace FoodApp
                 break;
             }
 
-            Console.WriteLine(new string('-', 20) + "Регистрация завершена успешно" + new string('-', 20));
+            Console.Write("Введите номер телефона: ");
+
+            while(true)
+            {
+                string number = Console.ReadLine();
+
+                if(!phoneRegex.IsMatch(number))
+                {
+                    Console.WriteLine("Номер указан не верно, повторите попытку!");
+                    continue;
+                }
+
+                int.TryParse(string.Join("", number.Where(c => char.IsDigit(c))), out phoneNumber);
+                break;
+            }
 
             clientsCollection.AddClient(login, password, name, Status.Bronze);
+            DataBaseController.ClientBaseSave(clientsCollection);
 
-            clientsCollection.Save();
+            Console.WriteLine(new string('-', 20) + "Регистрация завершена успешно" + new string('-', 20));
 
             Console.Write("Нажмите любую клавишу для продолжения");
             Console.ReadKey();
@@ -146,7 +163,7 @@ namespace FoodApp
 
         public void StartApp(ClientsCollection clientsCollection)
         {
-            Console.WriteLine("1. Вход в дневник." + new string(' ', 5) + "2.Регистрация нового пользователя");
+            Console.WriteLine("1. Авторизация" + new string(' ', 5) + "2. Регистрация");
 
             while (true)
             {
