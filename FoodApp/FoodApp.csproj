@@ -50,6 +50,7 @@
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Collections\ClientsCollection.cs" />
     <Compile Include="Collections\Status.cs" />
+    <Compile Include="Collections\Storage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

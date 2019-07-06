@@ -10,8 +10,7 @@ namespace FoodApp
     {
         static Client currentClient;
         static ClientsCollection collection = DataBaseController.ClientBaseLoad();
-        [Serializable]
-        static Dictionary<int, int> storage;
+        static Storage storage = DataBaseController.StorageBaseLoad();
 
         static void Clear()
         {

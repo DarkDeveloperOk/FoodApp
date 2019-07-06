@@ -41,5 +41,37 @@ namespace FoodApp
 
             return clientsCollection;
         }
+
+        public static Storage StorageBaseLoad()
+        {
+            Storage storage;
+
+            if (File.Exists("storage.dat"))
+            {
+                FileStream storageFileStream = new FileStream("storage.dat", FileMode.Open, FileAccess.ReadWrite);
+                BinaryFormatter formatter = new BinaryFormatter();
+                storage = formatter.Deserialize(storageFileStream) as Storage;
+                storageFileStream.Close();
+            }
+            else
+            {
+                storage = new Storage();
+
+                FileStream storageFileStream = new FileStream("storage.dat", FileMode.OpenOrCreate, FileAccess.Write);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(storageFileStream, storage);
+                storageFileStream.Close();
+            }
+
+            return storage;
+        }
+
+        public static void StorageBaseSave(Storage storage)
+        {
+            FileStream storageFileStream = new FileStream("storage.dat", FileMode.OpenOrCreate, FileAccess.Write);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(storageFileStream, storage);
+            storageFileStream.Close();
+        }
     }
 }
