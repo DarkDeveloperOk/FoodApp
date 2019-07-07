@@ -13,9 +13,9 @@ namespace FoodApp
     {
         public List<Client> clients = new List<Client>();
 
-        public void AddClient(string login, string password, string name, Status status)
+        public void AddClient(string login, string password, string name, int phoneNumber, Status status)
         {
-            clients.Add(new Client(login, password, name, status));
+            clients.Add(new Client(login, password, name, phoneNumber, status));
         }
 
         public bool CheckContainsLogin(string login)
@@ -30,7 +30,5 @@ namespace FoodApp
 
             return false;
         }
-
-        
     }
 }

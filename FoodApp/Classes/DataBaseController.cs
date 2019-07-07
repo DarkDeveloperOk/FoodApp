@@ -73,5 +73,13 @@ namespace FoodApp
             formatter.Serialize(storageFileStream, storage);
             storageFileStream.Close();
         }
+
+        public static void SendOrder(Order order)
+        {
+            FileStream OrderStream = new FileStream(order.orderId + ".dat", FileMode.Create, FileAccess.Write);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(OrderStream, order);
+            OrderStream.Close();
+        }
     }
 }

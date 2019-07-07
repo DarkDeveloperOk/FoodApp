@@ -11,6 +11,7 @@ namespace FoodApp
         static Client currentClient;
         static ClientsCollection collection = DataBaseController.ClientBaseLoad();
         static Storage storage = DataBaseController.StorageBaseLoad();
+        static ShoppingCart myCart = new ShoppingCart();
 
         static void Clear()
         {

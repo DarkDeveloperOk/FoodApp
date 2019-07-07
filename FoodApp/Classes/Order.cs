@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
+    [Serializable]
     class Order
     {
+        public string orderId;
         public int productId;
         public int clientName;
         public int phoneNumber;
@@ -19,6 +21,7 @@ namespace FoodApp
             this.clientName = clientName;
             this.phoneNumber = phoneNumber;
             this.shoppingCart = shoppingCart;
+            orderId = "O" + DateTime.Now.Ticks.ToString().Remove(0, 9);
         }
     }
 }
