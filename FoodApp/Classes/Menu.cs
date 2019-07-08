@@ -19,13 +19,16 @@ namespace FoodApp
 
         public void SendOrder(ShoppingCart cart, Client client)
         {
+            Dictionary<int, int> productList = new Dictionary<int, int>();
+
             foreach(KeyValuePair<Product, int> pair in cart)
             {
                 storage.Subtract(pair.Key.ProductId, pair.Value);
+                productList.Add(pair.Key.ProductId, pair.Value);
             }
 
             DataBaseController.StorageBaseSave(storage);
-            DataBaseController.SendOrder(new Order(client.name, client.phoneNumber, cart));
+            DataBaseController.SendOrder(new Order(client.name, client.phoneNumber, cart.GetSum(), productList));
         }
 
         public bool CheckAailability(Product product)

@@ -12,6 +12,8 @@ namespace FoodApp
     {
         Dictionary<Product, int> products = new Dictionary<Product, int>();
 
+        public int Discount { get; set; }
+        
         public void Add(Product product, int quantity)
         {
             if (products.ContainsKey(product))
@@ -45,7 +47,7 @@ namespace FoodApp
                 sum += (pair.Key.Price * pair.Value);
             }
 
-            return sum;
+            return sum - (sum/100 * Discount);
         }
 
         private void ShowCart()
@@ -53,19 +55,20 @@ namespace FoodApp
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Корзина:");
             Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine(new string('-', 9));
 
             string s1 = "Название", s2 = "цена", s3 = "кол", s4 = "сумма";
-            Console.WriteLine("{0, -23} {1, -10} {2, -5} {3}", s1, s2, s3, s4);
+            Console.WriteLine("{0, -25} {1, -10} {2, -5} {3}", s1, s2, s3, s4);
 
             int number = 0;
             foreach (KeyValuePair<Product, int> pair in products)
             {
-                string name = pair.Key.Name.PadRight(pair.Key.Name.Length + (25 - pair.Key.Name.Length));
+                string name = pair.Key.Name.PadRight(pair.Key.Name.Length + (23 - pair.Key.Name.Length));
 
                 Console.WriteLine("{0}.{1} {2, -11} {3, -4} {4}", number += 1, name, pair.Key.Price, pair.Value, pair.Key.Price * pair.Value);
             }
             Console.WriteLine(new string('-', 50));
-            Console.WriteLine("Общая сумма заказа: {0, 29}" + Environment.NewLine, GetSum());
+            Console.WriteLine("Общая сумма заказа с учетом скидки {1}%:    {0:f2}" + Environment.NewLine, GetSum(), Discount);
         }
 
         private void EditShoppingCart()

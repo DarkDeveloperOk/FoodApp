@@ -25,7 +25,7 @@ namespace FoodApp
             this.login = login;
             this.password = password;
             this.name = name;
-            status = Status.Bronze;
+            status = Status.Gold;
             this.phoneNumber = phoneNumber;
         }
 
