@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
+    [Serializable]
     public class Product
     {
         public string Name { get; set; }
@@ -13,7 +14,7 @@ namespace FoodApp
         public double Price { get; set; }
         readonly int productId;
 
-        public Product(string name, MenuSections section, double price, int weight)
+        public Product(string name, MenuSections section, double price)
         {
             Name = name;
             Section = section;

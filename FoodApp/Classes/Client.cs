@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
+    [Serializable]
     class Client
     {
         readonly string login;
@@ -19,12 +20,12 @@ namespace FoodApp
 
         }
 
-        public Client(string login, string password, string name, int phoneNumber, Status status)
+        public Client(string login, string password, string name, int phoneNumber)
         {
             this.login = login;
             this.password = password;
             this.name = name;
-            this.status = status;
+            status = Status.Bronze;
             this.phoneNumber = phoneNumber;
         }
 

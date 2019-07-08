@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AdminTools.cs" />
     <Compile Include="Classes\ClientController.cs" />
     <Compile Include="Classes\Client.cs" />
     <Compile Include="Classes\DataBaseController.cs" />

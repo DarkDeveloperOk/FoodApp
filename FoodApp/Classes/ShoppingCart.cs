@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
-    class ShoppingCart
+    class ShoppingCart : IEnumerator, IEnumerable
     {
         Dictionary<Product, int> products = new Dictionary<Product, int>();
 
@@ -46,7 +47,7 @@ namespace FoodApp
             return sum;
         }
 
-        public void ShowCart()
+        private void ShowCart()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Корзина:");
@@ -153,6 +154,7 @@ namespace FoodApp
         public int DoChoice()
         {
             Console.WriteLine("cont - продолжить заказивать; edit - редактировать; send - отправить; quit - выход;");
+            Console.WriteLine(new String('-', 50));
             string choose;
             int endCode;
 
@@ -189,6 +191,37 @@ namespace FoodApp
             }
 
             return endCode;
+        }
+
+        int position = -1;
+
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
+
+        public bool MoveNext()
+        {
+            if(position < products.Count - 1)
+            {
+                ++position;
+                return true;
+            }
+            else
+            {
+                Reset();
+                return false;
+            }
+        }
+
+        public void Reset()
+        {
+            position = -1;
+        }
+
+        public object Current
+        {
+            get { return products.ElementAt(position); }
         }
     }
 }

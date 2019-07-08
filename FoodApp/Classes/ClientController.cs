@@ -73,7 +73,7 @@ namespace FoodApp
 
         public void ToRegister(ref ClientsCollection clientsCollection)
         {
-            Regex ruls = new Regex(@"^[a-zA-Z0-9]+$");
+            Regex loginPassRuls = new Regex(@"^[a-zA-Z0-9]+$");
             Regex phoneRegex = new Regex(@"^((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}$");
             Regex nameRegex = new Regex(@"^[а-яА-Яa-zA-Z]+$");
 
@@ -92,7 +92,7 @@ namespace FoodApp
                     break;
                 }
 
-                if (!ruls.IsMatch(login))
+                if (!loginPassRuls.IsMatch(login))
                 {
                     Console.WriteLine("Недопустимые символы, повторите попытку!");
                     continue;
@@ -112,7 +112,7 @@ namespace FoodApp
             {
                 password = Console.ReadLine();
 
-                if (!ruls.IsMatch(password))
+                if (!loginPassRuls.IsMatch(password))
                 {
                     Console.WriteLine("Недопустимые символы, повторите попытку!");
                     continue;
@@ -152,7 +152,7 @@ namespace FoodApp
                 break;
             }
 
-            clientsCollection.AddClient(login, password, name, Status.Bronze);
+            clientsCollection.AddClient(login, password, name, phoneNumber);
             DataBaseController.ClientBaseSave(clientsCollection);
 
             Console.WriteLine(new string('-', 20) + "Регистрация завершена успешно" + new string('-', 20));

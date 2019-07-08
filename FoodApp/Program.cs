@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 // не реальзована история заказов клиентов и скидка которая зависит от статуса клиента(статус должен зависить от того сколько клиент раньше заказывал
 //ProductCollection - обратить внимание
 //Menu - обратить внимание
+//AdminTools добавлено для заполнения ProductCollection и Storage
 namespace FoodApp
 {
     class Program
@@ -14,14 +15,6 @@ namespace FoodApp
         static ClientsCollection clientData = DataBaseController.ClientBaseLoad();
         static ShoppingCart myCart = new ShoppingCart();
         static Menu menu = new Menu(DataBaseController.AllProductsLoad(), DataBaseController.StorageBaseLoad());
-
-
-        static void Clear()
-        {
-            Console.Clear();
-            Console.WriteLine("INFO: quit - выход; data - показать записи;");
-            Console.WriteLine(new string('-', 80));
-        }
 
         static void Main(string[] args)
         {
@@ -48,8 +41,9 @@ namespace FoodApp
                 }
                 else if (proccesCode == -1)
                 {
-                    DataBaseController.SendOrder(new Order(currentClient.name, currentClient.phoneNumber, myCart));
+                    menu.SendOrder(myCart, currentClient);
                     myCart = new ShoppingCart();
+
                     Console.WriteLine("Ваш заказ успешно отправлен. \n1. Сделать еще заказ \n2. Выход");
                     string choice;
                     while (true)
@@ -66,7 +60,7 @@ namespace FoodApp
                         }
                     }
 
-                    if(choice == "1")
+                    if (choice == "1")
                     {
                         continue;
                     }

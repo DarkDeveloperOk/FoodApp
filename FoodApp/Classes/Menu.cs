@@ -17,6 +17,17 @@ namespace FoodApp
             this.storage = storage;
         }
 
+        public void SendOrder(ShoppingCart cart, Client client)
+        {
+            foreach(KeyValuePair<Product, int> pair in cart)
+            {
+                storage.Subtract(pair.Key.ProductId, pair.Value);
+            }
+
+            DataBaseController.StorageBaseSave(storage);
+            DataBaseController.SendOrder(new Order(client.name, client.phoneNumber, cart));
+        }
+
         public bool CheckAailability(Product product)
         {
             if (storage.ShowQuantity(product.ProductId) > 0)
