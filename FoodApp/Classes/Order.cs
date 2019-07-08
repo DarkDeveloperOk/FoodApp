@@ -10,14 +10,12 @@ namespace FoodApp
     class Order
     {
         public string orderId;
-        public int productId;
-        public int clientName;
+        public string clientName;
         public int phoneNumber;
         public ShoppingCart shoppingCart;
 
-        public Order(int productId, int clientName, int phoneNumber, ShoppingCart shoppingCart)
+        public Order(string clientName, int phoneNumber, ShoppingCart shoppingCart)
         {
-            this.productId = productId;
             this.clientName = clientName;
             this.phoneNumber = phoneNumber;
             this.shoppingCart = shoppingCart;

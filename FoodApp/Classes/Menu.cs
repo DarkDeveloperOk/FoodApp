@@ -99,7 +99,7 @@ namespace FoodApp
 
                 for (int i = 0; i < productsInSection.Count; ++i)
                 {
-                    if (storage.ShowQuantity(productsInSection.ElementAt(i).ProductId) <= 0)
+                    if (!CheckAailability(productsInSection.ElementAt(i)))
                     {
                         continue;
                     }

@@ -150,7 +150,7 @@ namespace FoodApp
             }
         }
 
-        public int doChoice()
+        public int DoChoice()
         {
             Console.WriteLine("cont - продолжить заказивать; edit - редактировать; send - отправить; quit - выход;");
             string choose;

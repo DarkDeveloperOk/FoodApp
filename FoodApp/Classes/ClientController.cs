@@ -161,7 +161,7 @@ namespace FoodApp
             Console.ReadKey();
         }
 
-        public void StartApp(ClientsCollection clientsCollection)
+        public void DoFirstChoice(ClientsCollection clientsCollection)
         {
             Console.WriteLine("1. Авторизация" + new string(' ', 5) + "2. Регистрация");
 
