@@ -10,6 +10,7 @@ namespace FoodApp
 {
     static class DataBaseController
     {
+        #region ClientBase
         public static void ClientBaseSave(ClientsCollection clientsCollection)
         {
             FileStream stream = new FileStream("clientsDataBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
@@ -41,7 +42,9 @@ namespace FoodApp
 
             return clientsCollection;
         }
+        #endregion
 
+        #region StorageBase
         public static Storage StorageBaseLoad()
         {
             Storage storage;
@@ -73,6 +76,7 @@ namespace FoodApp
             formatter.Serialize(storageFileStream, storage);
             storageFileStream.Close();
         }
+        #endregion
 
         public static void SendOrder(Order order)
         {
@@ -81,5 +85,40 @@ namespace FoodApp
             formatter.Serialize(OrderStream, order);
             OrderStream.Close();
         }
+
+        #region AllProducts
+        public static ProductsCollection AllProductsLoad()
+        {
+            ProductsCollection allProducts;
+
+            if (File.Exists("allProducts.dat"))
+            {
+                FileStream allProductsFileStream = new FileStream("allProducts.dat", FileMode.Open, FileAccess.ReadWrite);
+                BinaryFormatter formatter = new BinaryFormatter();
+                allProducts = formatter.Deserialize(allProductsFileStream) as ProductsCollection;
+                allProductsFileStream.Close();
+            }
+            else
+            {
+                allProducts = new ProductsCollection();
+
+                FileStream allProductsFileStream = new FileStream("allProducts.dat", FileMode.OpenOrCreate, FileAccess.Write);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(allProductsFileStream, allProducts);
+                allProductsFileStream.Close();
+            }
+
+            return allProducts;
+        }
+
+        //Для клиента этот метод не нужен, добавил его чтобы заполнить и сохранить колекцию
+        public static void AllProductsSave(ProductsCollection allProducts)
+        {
+            FileStream allProductsFileStream = new FileStream("allProducts.dat", FileMode.OpenOrCreate, FileAccess.Write);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(allProductsFileStream, allProducts);
+            allProductsFileStream.Close();
+        }
+        #endregion
     }
 }

@@ -9,11 +9,11 @@ namespace FoodApp
     public class Product
     {
         public string Name { get; set; }
-        public string Section { get; set; }
+        public MenuSections Section { get; set; }
         public double Price { get; set; }
         readonly int productId;
 
-        public Product(string name, string section, double price, int weight)
+        public Product(string name, MenuSections section, double price, int weight)
         {
             Name = name;
             Section = section;
