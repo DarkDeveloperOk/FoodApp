@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
+    [Serializable]
     class ShoppingCart : IEnumerator, IEnumerable
     {
         Dictionary<Product, int> products = new Dictionary<Product, int>();
@@ -54,11 +55,11 @@ namespace FoodApp
             Console.ForegroundColor = ConsoleColor.Gray;
 
             string s1 = "Название", s2 = "цена", s3 = "кол", s4 = "сумма";
-            Console.WriteLine("{0, -25} {1, -10} {2, -5} {3}", s1, s2, s3, s4);
+            Console.WriteLine("{0, -23} {1, -10} {2, -5} {3}", s1, s2, s3, s4);
 
+            int number = 0;
             foreach (KeyValuePair<Product, int> pair in products)
             {
-                int number = 0;
                 string name = pair.Key.Name.PadRight(pair.Key.Name.Length + (25 - pair.Key.Name.Length));
 
                 Console.WriteLine("{0}.{1} {2, -11} {3, -4} {4}", number += 1, name, pair.Key.Price, pair.Value, pair.Key.Price * pair.Value);
@@ -89,7 +90,7 @@ namespace FoodApp
             }
 
 
-            Console.WriteLine("1. Добавить 2. Убрать 3. Отмена");
+            Console.WriteLine("1. Добавить 2. Убрать 3. Отменить редактирование");
             string choice;
 
             while (true)
@@ -153,14 +154,18 @@ namespace FoodApp
 
         public int DoChoice()
         {
-            Console.WriteLine("cont - продолжить заказивать; edit - редактировать; send - отправить; quit - выход;");
-            Console.WriteLine(new String('-', 50));
-            string choose;
             int endCode;
 
             while (true)
             {
-                choose = Console.ReadLine().ToLower();
+                Console.Clear();
+
+                Console.WriteLine("cont - продолжить заказ; edit - редактировать; send - отправить; quit - выход;");
+                Console.WriteLine(new String('-', 80));
+
+                ShowCart();
+
+                string choose = Console.ReadLine().ToLower();
 
                 if (choose == "quit")
                 {
@@ -175,7 +180,6 @@ namespace FoodApp
                 {
                     EditShoppingCart();
                     Console.Clear();
-                    ShowCart();
                     continue;
                 }
                 else if (choose == "send")

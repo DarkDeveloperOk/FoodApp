@@ -24,9 +24,11 @@ namespace FoodApp
 
             currentClient = clientController.DoAuthorization(clientData);
 
+            Console.WriteLine("Клиент: {0}", currentClient.name);
+
             while (true)
             {
-                myCart = menu.MakeOrder();
+                myCart = menu.MakeOrder(ref myCart);
 
                 if (myCart == null)
                 {
@@ -37,6 +39,7 @@ namespace FoodApp
 
                 if (proccesCode == 1)
                 {
+                    Console.Clear();
                     continue;
                 }
                 else if (proccesCode == -1)
@@ -62,6 +65,7 @@ namespace FoodApp
 
                     if (choice == "1")
                     {
+                        Console.Clear();
                         continue;
                     }
 

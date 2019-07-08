@@ -39,7 +39,12 @@ namespace FoodApp
 
         public void ShowMenu()
         {
+            Console.WriteLine("cart - открыть корзину; quit - выход;" + Environment.NewLine);
+
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(new string('-', 15) + " M e n u " + new string('-', 15));
+            Console.ForegroundColor = ConsoleColor.Gray;
+
             int numerator = 0;
 
             foreach (var section in MenuSections.GetValues(typeof(MenuSections)))
@@ -50,10 +55,9 @@ namespace FoodApp
             Console.WriteLine(new string('-', 50));
         }
 
-        public ShoppingCart MakeOrder()
+        public ShoppingCart MakeOrder(ref ShoppingCart shoppCart)
         {
-            ShoppingCart shoppingCart = null;
-
+            ShoppingCart shoppingCart = shoppCart;
             while (true)
             {
                 bool continueStatus = true;
@@ -75,27 +79,22 @@ namespace FoodApp
                 else if (choice == "1")
                 {
                     productsInSection = GetProdInSection(MenuSections.Первое);
-                    break;
                 }
                 else if (choice == "2")
                 {
                     productsInSection = GetProdInSection(MenuSections.Гарниры);
-                    break;
                 }
                 else if (choice == "3")
                 {
                     productsInSection = GetProdInSection(MenuSections.Салаты);
-                    break;
                 }
                 else if (choice == "4")
                 {
                     productsInSection = GetProdInSection(MenuSections.Десерты);
-                    break;
                 }
                 else if (choice == "5")
                 {
                     productsInSection = GetProdInSection(MenuSections.Напитки);
-                    break;
                 }
                 else
                 {
@@ -158,7 +157,7 @@ namespace FoodApp
                         int quantity = 0;
                         bool parseResult = int.TryParse(quantityStr, out quantity);
 
-                        if (parseResult && quantity > 0)
+                        if (parseResult && quantity >= 0)
                         {
                             if (quantity == 0)
                             {
@@ -166,7 +165,7 @@ namespace FoodApp
                             }
                             else if (storage.ShowQuantity(product.ProductId) - quantity < 0)
                             {
-                                Console.WriteLine("В наличии только {0}, введите другое количество", storage.ShowQuantity(product.ProductId));
+                                Console.WriteLine("В наличии только {0}, введите другое количество(0 отмена позиции)", storage.ShowQuantity(product.ProductId));
                                 continue;
                             }
 
@@ -186,6 +185,8 @@ namespace FoodApp
                         }
                     }
                 }
+
+                Console.Clear();
 
                 if(continueStatus == false)
                 {

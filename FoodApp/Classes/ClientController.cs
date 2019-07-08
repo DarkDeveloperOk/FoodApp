@@ -64,6 +64,7 @@ namespace FoodApp
             {
                 if(client.Login == login)
                 {
+                    Console.Clear();
                     return client;
                 }
             }
@@ -74,7 +75,7 @@ namespace FoodApp
         public void ToRegister(ref ClientsCollection clientsCollection)
         {
             Regex loginPassRuls = new Regex(@"^[a-zA-Z0-9]+$");
-            Regex phoneRegex = new Regex(@"^((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}$");
+            Regex phoneRegex = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
             Regex nameRegex = new Regex(@"^[а-яА-Яa-zA-Z]+$");
 
             Console.WriteLine("ВАЖНО! Вводите только латинские символы и цифры!!!");
@@ -159,14 +160,14 @@ namespace FoodApp
 
             Console.Write("Нажмите любую клавишу для продолжения");
             Console.ReadKey();
+            Console.Clear();
         }
 
         public void DoFirstChoice(ClientsCollection clientsCollection)
         {
-            Console.WriteLine("1. Авторизация" + new string(' ', 5) + "2. Регистрация");
-
             while (true)
             {
+                Console.WriteLine("1. Авторизация" + new string(' ', 5) + "2. Регистрация");
                 choose = Console.ReadLine();
 
                 switch (choose.ToLower())
@@ -178,7 +179,7 @@ namespace FoodApp
                     case "2":
                         {
                             ToRegister(ref clientsCollection);
-                            continue; ;
+                            continue;
                         }
                     case "quit":
                         {

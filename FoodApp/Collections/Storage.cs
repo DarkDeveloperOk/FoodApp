@@ -61,6 +61,11 @@ namespace FoodApp
             return false;
         }
 
+        public int Count
+        {
+            get { return storage.Count; }
+        }
+
         int position = -1;
 
         public object Current

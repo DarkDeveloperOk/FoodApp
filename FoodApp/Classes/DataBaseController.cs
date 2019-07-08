@@ -23,9 +23,9 @@ namespace FoodApp
         {
             ClientsCollection clientsCollection;
 
-            if (File.Exists("userBase.dat"))
+            if (File.Exists("clientsDataBase.dat"))
             {
-                FileStream clientsFileStream = new FileStream("userBase.dat", FileMode.Open, FileAccess.ReadWrite);
+                FileStream clientsFileStream = new FileStream("clientsDataBase.dat", FileMode.Open, FileAccess.ReadWrite);
                 BinaryFormatter formatter = new BinaryFormatter();
                 clientsCollection = formatter.Deserialize(clientsFileStream) as ClientsCollection;
                 clientsFileStream.Close();
@@ -34,7 +34,7 @@ namespace FoodApp
             {
                 clientsCollection = new ClientsCollection();
 
-                FileStream stream = new FileStream("userBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
+                FileStream stream = new FileStream("clientsDataBase.dat", FileMode.OpenOrCreate, FileAccess.Write);
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, clientsCollection);
                 stream.Close();

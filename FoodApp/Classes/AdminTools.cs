@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp
 {
-    // добавлено для себя для заполнения ProductCollection и Storage
+    // добавлено для себя для заполнения ProductCollection и Storage. И тестирования
     static class AdminTools
     {
         public static void AddProd()
@@ -14,7 +14,7 @@ namespace FoodApp
             ProductsCollection productsCollection = new ProductsCollection();
             Storage storage = new Storage();
 
-            while(true)
+            while (true)
             {
                 Console.Write("name ");
                 string name = Console.ReadLine();
@@ -43,7 +43,7 @@ namespace FoodApp
                 Console.WriteLine(new String('-', 30));
             }
 
-            foreach(Product product in productsCollection)
+            foreach (Product product in productsCollection)
             {
                 Console.Write(product.Name + " Quantity ");
                 int quantity = int.Parse(Console.ReadLine());
@@ -55,6 +55,29 @@ namespace FoodApp
             DataBaseController.StorageBaseSave(storage);
 
             Console.ReadKey();
+        }
+
+        public static void ShowStorage(Storage storage)
+        {
+            foreach (KeyValuePair<int, int> pair in storage)
+            {
+                Console.WriteLine("Product {0} Quantity {1}", pair.Key, pair.Value);
+            }
+        }
+
+        public static void ReloadStorage(ref Storage storage)
+        {
+            Storage newStorage = new Storage();
+           
+            foreach(KeyValuePair<int, int> pair in storage)
+            {
+                Console.Write(pair.Key + " " + pair.Value);
+                Console.Write(" Сколько должно быть: ");
+                int quantity = int.Parse(Console.ReadLine());
+                newStorage.Add(pair.Key, quantity);
+            }
+
+            storage = newStorage;
         }
     }
 }
