@@ -30,5 +30,17 @@ namespace FoodApp
 
             return false;
         }
+
+        public void ReSaveClient(Client client)
+        {
+            for(int i = 0; i < clients.Count; i++)
+            {
+                if(clients[i].Login == client.Login)
+                {
+                    clients[i] = client;
+                    break;
+                }
+            }
+        }
     }
 }

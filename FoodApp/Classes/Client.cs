@@ -14,6 +14,8 @@ namespace FoodApp
         public string name;
         public int phoneNumber;
         public Status status;
+        public List<Order> ordersHistory = new List<Order>();
+        public double totalSum = 0;
 
         public Client()
         {
@@ -25,7 +27,7 @@ namespace FoodApp
             this.login = login;
             this.password = password;
             this.name = name;
-            status = Status.Gold;
+            status = Status.Bronze;
             this.phoneNumber = phoneNumber;
         }
 
@@ -42,6 +44,25 @@ namespace FoodApp
             }
 
             return false;
+        }
+
+        public void AddOrderToHistory(Order order)
+        {
+            ordersHistory.Add(order);
+            totalSum += order.sum;
+
+            if(totalSum >= 200 && totalSum < 400)
+            {
+                status = Status.Silver;
+            }
+            else if(totalSum >= 400 && totalSum < 600)
+            {
+                status = Status.Gold;
+            }
+            else if(totalSum >= 600)
+            {
+                status = Status.Platinum;
+            }
         }
     }
 }

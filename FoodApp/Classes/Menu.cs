@@ -17,7 +17,7 @@ namespace FoodApp
             this.storage = storage;
         }
 
-        public void SendOrder(ShoppingCart cart, Client client)
+        public void SendOrder(ShoppingCart cart, ref Client client)
         {
             Dictionary<int, int> productList = new Dictionary<int, int>();
 
@@ -27,8 +27,12 @@ namespace FoodApp
                 productList.Add(pair.Key.ProductId, pair.Value);
             }
 
+            Order order = new Order(client.name, client.phoneNumber, cart.GetSum(), productList);
+
+            client.AddOrderToHistory(order);
+
             DataBaseController.StorageBaseSave(storage);
-            DataBaseController.SendOrder(new Order(client.name, client.phoneNumber, cart.GetSum(), productList));
+            DataBaseController.SendOrder(order);
         }
 
         public bool CheckAailability(Product product)

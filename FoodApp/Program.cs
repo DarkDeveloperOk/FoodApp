@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// не реальзована история заказов клиента(статус должен зависить от того сколько клиент раньше заказывал)
 //ProductCollection - обратить внимание
 //Menu - обратить внимание
 //AdminTools добавлено для заполнения ProductCollection и Storage
@@ -26,10 +25,10 @@ namespace FoodApp
 
             Console.WriteLine("Клиент: {0} Статус: {1}", currentClient.name, currentClient.status);
 
-            myCart.Discount = (int)currentClient.status;
-
             while (true)
             {
+                myCart.Discount = (int)currentClient.status;
+
                 myCart = menu.MakeOrder(ref myCart);
 
                 if (myCart == null)
@@ -47,7 +46,11 @@ namespace FoodApp
                 else if (proccesCode == -1)
                 {
                     Console.Clear();
-                    menu.SendOrder(myCart, currentClient);
+                    menu.SendOrder(myCart, ref currentClient);
+
+                    clientData.ReSaveClient(currentClient);
+                    DataBaseController.ClientBaseSave(clientData);
+
                     myCart = new ShoppingCart();
 
                     Console.WriteLine("Ваш заказ успешно отправлен. \n1. Сделать еще заказ \n2. Выход");
